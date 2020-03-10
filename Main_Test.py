@@ -19,11 +19,12 @@ for file in all_files:
     # Tokenization
     token_pairs = generateTokens(file_text, file)
     # Linguistic Modules
-    modified_token_pairs = SnowStem(token_pairs)
+    modified_token_pairs = SnowStem(PortStem(token_pairs))
     all_token_pairs += modified_token_pairs
 
 # Sorting the Tokens
 sorted_tokens = sortTokens(all_token_pairs)
+print(sorted_tokens)
 
 # Transformation into Postings
 posting_list = transformation_into_postings(sorted_tokens)
