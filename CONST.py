@@ -1,2 +1,2 @@
 # Root Directory
-rootDir = '/home/automan/Downloads/HillaryEmails/'
+rootDir = '/home/hshuo/Downloads/6226/HillaryEmails/'
