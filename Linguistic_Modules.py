@@ -5,30 +5,37 @@
 
 from nltk.stem.porter import PorterStemmer
 from nltk.stem.snowball import SnowballStemmer
-from Directory_Listing import listFiles 
+from Directory_Listing import listFiles
 from File_Reading import getFileContents
 from Tokenization import generateTokens
 from CONST import *
+import re
 
 portStemmer = PorterStemmer()
 snowStemmer = SnowballStemmer("english")
 
+
+def RemovePunSym(tokenPair):
+    return [(re.sub(r'[^\w\s]', '', token), docID) for token, docID in tokenPair]
+
+
 def PortStem(tokenPair):
-	return [(portStemmer.stem(token),docID) for token, docID in tokenPair]
+    return [(portStemmer.stem(token), docID) for token, docID in tokenPair]
+
 
 def SnowStem(tokenPair):
-	return [(snowStemmer.stem(token),docID) for token, docID in tokenPair]
+    return [(snowStemmer.stem(token), docID) for token, docID in tokenPair]
+
 
 if __name__ == "__main__":
-	# Standalone test
-	fileList = listFiles(rootDir)
-	fileContent = getFileContents(fileList[0])
-	tokenPair = generateTokens(fileContent,fileList[0])
-	print(tokenPair)
+    # Standalone test
+    fileList = listFiles(rootDir)
+    fileContent = getFileContents(fileList[0])
+    tokenPair = generateTokens(fileContent, fileList[0])
+    print(tokenPair)
 
-	portStemTokenPair = PortStem(tokenPair)
-	print(portStemTokenPair)
+    portStemTokenPair = PortStem(tokenPair)
+    print(portStemTokenPair)
 
-	snowStemTokenPair = SnowStem(tokenPair)
-	print(snowStemTokenPair)
-
+    snowStemTokenPair = SnowStem(tokenPair)
+    print(snowStemTokenPair)

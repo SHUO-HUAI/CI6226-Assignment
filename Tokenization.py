@@ -3,7 +3,6 @@
 # Output: list of pairs < string (token) , string (document id) >
 
 from CONST import *
-import re
 import itertools
 from File_Reading import getFileContents
 
