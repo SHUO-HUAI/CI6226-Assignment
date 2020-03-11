@@ -4,6 +4,7 @@
 
 from CONST import *
 
+
 def getFileContents(filePath):
 
 	f = open(filePath, encoding='utf-8')
@@ -12,8 +13,9 @@ def getFileContents(filePath):
 
 	return contents	
 
+
 if __name__ == '__main__':
 	# Standalone Test
-	filePath = rootDir + '7936.txt'
+	filePath = rootDir + '1.txt'
 	contents = getFileContents(filePath)
 	print(contents)

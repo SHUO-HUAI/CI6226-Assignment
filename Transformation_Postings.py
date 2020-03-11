@@ -11,6 +11,7 @@ from Tokenization import generateTokens
 from Linguistic_Modules import PortStem, SnowStem
 from Sorting_Tokens import sortTokens
 
+
 def transformation_into_postings(sorted_token_pairs):  
     # Used dictionary data structure (Hash table)
     dictionary_ = {}
@@ -25,10 +26,11 @@ def transformation_into_postings(sorted_token_pairs):
 
     return dictionary_
 
+
 if __name__ == "__main__":
     # Standalone Test
     fileList = listFiles(rootDir)
-    for i in range(5):
+    for i in range(2):
         tokenPair = generateTokens(getFileContents(fileList[i]), fileList[i])
     
     original_list = SnowStem(tokenPair)

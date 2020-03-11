@@ -11,7 +11,15 @@ def generateTokens(contents, filePath):
     # tokens = re.sub(r"^\s+", "", contents).split()
 
     tokens = contents.split()
-    return list(zip(tokens, itertools.repeat(filePath)))
+    # return list(zip(tokens, itertools.repeat(filePath)))
+    result = []
+
+    for item in tokens:
+        result.append([])
+        result[-1].append(item)
+        result[-1].append(filePath)
+
+    return result
 
 
 if __name__ == '__main__':
@@ -20,4 +28,5 @@ if __name__ == '__main__':
     contents = getFileContents(filePath)
     tokens = generateTokens(contents, filePath)
     print(contents)
+    print("tokens")
     print(tokens)

@@ -15,6 +15,15 @@ portStemmer = PorterStemmer()
 snowStemmer = SnowballStemmer("english")
 
 
+def remove_punctuation_symbols(tokenPair):
+    """
+        remove the !@#$%^&*()-_=+'`~ ":;|/.,?[]{}<> symbols
+    """
+    for item in tokenPair:
+        temp_item = str(item[0])
+        item[0] = temp_item.lower()
+        item[0] = re.sub(r'[\^\[\]\-\\!@#$%&*()_=+`~":;|/.,?{}<>\']', '', item[0])
+
 
 def PortStem(tokenPair):
     return [(portStemmer.stem(token), docID) for token, docID in tokenPair]
@@ -29,6 +38,8 @@ if __name__ == "__main__":
     fileList = listFiles(rootDir)
     fileContent = getFileContents(fileList[0])
     tokenPair = generateTokens(fileContent, fileList[0])
+
+    remove_punctuation_symbols(tokenPair)
     print(tokenPair)
 
     portStemTokenPair = PortStem(tokenPair)

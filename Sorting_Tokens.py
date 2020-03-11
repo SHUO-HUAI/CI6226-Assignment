@@ -10,10 +10,12 @@ from File_Reading import getFileContents
 from Tokenization import generateTokens
 from Linguistic_Modules import PortStem, SnowStem
 
+
 def sortTokens(token_pairs_list):
     sortedTokens = sorted(token_pairs_list, key=lambda element: (element[0], element[1]))
 
     return sortedTokens
+
 
 if __name__ == "__main__":
     # Standalone Test
