@@ -15,9 +15,6 @@ portStemmer = PorterStemmer()
 snowStemmer = SnowballStemmer("english")
 
 
-def RemovePunSym(tokenPair):
-    return [(re.sub(r'[^\w\s]', '', token), docID) for token, docID in tokenPair]
-
 
 def PortStem(tokenPair):
     return [(portStemmer.stem(token), docID) for token, docID in tokenPair]
