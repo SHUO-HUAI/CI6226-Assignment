@@ -6,12 +6,14 @@ from CONST import *
 import re
 import itertools
 from File_Reading import getFileContents
+
+
 def generateTokens(contents, filePath):
+    # tokens = re.sub(r"^\s+", "", contents).split()
 
-    tokens = re.sub(r"^\s+", "", contents).split()
-    print(tokens)
-
+    tokens = contents.split()
     return list(zip(tokens, itertools.repeat(filePath)))
+
 
 if __name__ == '__main__':
     # Standalone Test
