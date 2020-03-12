@@ -15,6 +15,24 @@ portStemmer = PorterStemmer()
 snowStemmer = SnowballStemmer("english")
 
 
+def RemovePuncSymls(tokenPair):
+    """
+        remove the !@#$%^&*()-_=+'`~ ":;|/.,?[]{}<> symbols
+    """
+    for item in tokenPair:
+        str_tmp = str(item[0])
+        item[0] = str_tmp.lower()
+        item[0] = re.sub(r'[\^\[\]\-\\!@#$%&*()_=+`~":;|/.,?{}<>\']', '', item[0])
+
+
+def PortStem(tokenPair):
+    return [(portStemmer.stem(token), docID) for token, docID in tokenPair]
+
+
+def SnowStem(tokenPair):
+    return [(snowStemmer.stem(token), docID) for token, docID in tokenPair]
+
+
 def LingStr(token):
     tmp = re.sub(r'[\^\[\]\-\\!@#$%&*()_=+`~":;|/.,?{}<>\']', '', str(token).lower())
     tmp = portStemmer.stem(str(tmp))
@@ -23,13 +41,7 @@ def LingStr(token):
 
 
 def LingModule(tokenPair):
-    pairList = []
-    for token, docID in tokenPair:
-        tmp = LingStr(token)
-        if tmp != "":
-            pairList.append((tmp,docID))
-
-    return pairList
+    return [(LingStr(token), docID) for token, docID in tokenPair]
 
 
 if __name__ == "__main__":
@@ -37,6 +49,15 @@ if __name__ == "__main__":
     fileList = ListFiles(rootDir)
     fileContent = GetFileContents(fileList[0])
     tokenPair = GenerateTokens(fileContent, fileList[0])
+
+    #RemovePuncSymls(tokenPair)
+    #print(tokenPair)
+
+    #portStemTokenPair = PortStem(tokenPair)
+    #print(portStemTokenPair)
+
+    #snowStemTokenPair = SnowStem(portStemTokenPair)
+    #print(snowStemTokenPair)
 
     outputPair = LingModule(tokenPair)
     print(outputPair)

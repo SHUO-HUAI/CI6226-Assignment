@@ -4,12 +4,12 @@
 # Output: merged postings list
 
 from CONST import *
-from Directory_Listing import listFiles
-from File_Reading import getFileContents
-from Tokenization import generateTokens
-from Linguistic_Modules import PortStem, SnowStem
-from Sorting_Tokens import sortTokens
-from Transformation_Postings import transformation_into_postings
+from Directory_Listing import ListFiles
+from File_Reading import GetFileContents
+from Tokenization import GenerateTokens
+from Linguistic_Modules import LingModule
+from Sorting_Tokens import SortTokens
+from Transformation_Postings import TransformationIntoPostings
 
 def postings_list_merge(postings_lists):   
     # Intersect the postings lists in increasing order of length   
@@ -42,13 +42,13 @@ def postings_list_merge(postings_lists):
 if __name__ == "__main__":
     # Standalone Test
     token_list = []
-    fileList = listFiles(rootDir)
+    fileList = ListFiles(rootDir)
     for i in range(5):
-        tokenPair = generateTokens(getFileContents(fileList[i]), fileList[i])
-        modifed_tokenPair = SnowStem(tokenPair)
+        tokenPair = GenerateTokens(GetFileContents(fileList[i]), fileList[i])
+        modifed_tokenPair = LingModule(tokenPair)
         token_list += modifed_tokenPair
         
-    sorted_list = sortTokens(token_list)
-    transformed_postings = transformation_into_postings(sorted_list)
+    sorted_list = SortTokens(token_list)
+    transformed_postings = TransformationIntoPostings(sorted_list)
     merged_list = postings_list_merge([transformed_postings['movement'], transformed_postings['need']])
     print(merged_list)

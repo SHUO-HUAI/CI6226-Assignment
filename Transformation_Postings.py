@@ -5,14 +5,14 @@
 # Output: inverted index
 
 from CONST import *
-from Directory_Listing import listFiles
-from File_Reading import getFileContents
-from Tokenization import generateTokens
-from Linguistic_Modules import PortStem, SnowStem
-from Sorting_Tokens import sortTokens
+from Directory_Listing import ListFiles
+from File_Reading import GetFileContents
+from Tokenization import GenerateTokens
+from Linguistic_Modules import LingModule
+from Sorting_Tokens import SortTokens
 
 
-def transformation_into_postings(sorted_token_pairs):  
+def TransformationIntoPostings(sorted_token_pairs):
     # Used dictionary data structure (Hash table)
     dictionary_ = {}
 
@@ -29,12 +29,13 @@ def transformation_into_postings(sorted_token_pairs):
 
 if __name__ == "__main__":
     # Standalone Test
-    fileList = listFiles(rootDir)
+    fileList = ListFiles(rootDir)
+    tokenPair = []
     for i in range(2):
-        tokenPair = generateTokens(getFileContents(fileList[i]), fileList[i])
+        tokenPair = tokenPair + GenerateTokens(GetFileContents(fileList[i]), fileList[i])
     
-    original_list = SnowStem(tokenPair)
-    sorted_list = sortTokens(original_list)
-    print(sorted_list)
-    transformed_postings = transformation_into_postings(sorted_list)
+    original_list = LingModule(tokenPair)
+    sorted_list = SortTokens(original_list)
+   # print(sorted_list)
+    transformed_postings = TransformationIntoPostings(sorted_list)
     print(transformed_postings)

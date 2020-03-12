@@ -5,12 +5,19 @@ import itertools
 
 from CONST import *
 from File_Reading import GetFileContents
-import re
 
 
 def GenerateTokens(contents, filePath):
     tokens = contents.split()
     return list(zip(tokens, itertools.repeat(filePath)))
+    result = []
+
+    for item in tokens:
+        result.append([])
+        result[-1].append(item)
+        result[-1].append(filePath)
+
+    return result
 
 
 if __name__ == '__main__':
