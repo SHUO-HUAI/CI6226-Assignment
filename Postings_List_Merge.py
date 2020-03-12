@@ -14,12 +14,12 @@ from Transformation_Postings import TransformationIntoPostings
 
 def postings_list_merge(postings_lists):
     # Intersect the postings lists in increasing order of length
-    sorted_postings_lists = sorted(postings_lists, key=lambda l: l[0], reverse=True)
-    first_len, first_list = sorted_postings_lists.pop()
+
+    first_len, first_list = postings_lists.pop()
     merged_list = []
 
-    while sorted_postings_lists:
-        second_len, second_list = sorted_postings_lists.pop()
+    while postings_lists:
+        second_len, second_list = postings_lists.pop()
 
         p1 = 0
         p2 = 0
@@ -37,7 +37,7 @@ def postings_list_merge(postings_lists):
         first_list = merged_list
         first_len = length
 
-    return merged_list
+    return list(set(merged_list))
 
 
 if __name__ == "__main__":
@@ -51,5 +51,5 @@ if __name__ == "__main__":
 
     sorted_list = SortTokens(token_list)
     transformed_postings = TransformationIntoPostings(sorted_list)
-    merged_list = postings_list_merge([transformed_postings['zone'], transformed_postings['us']])
+    merged_list = postings_list_merge([transformed_postings['zone'], transformed_postings['us'], transformed_postings['tie'], transformed_postings['state']])
     print(merged_list)
