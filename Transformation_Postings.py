@@ -24,12 +24,10 @@ def TransformationIntoPostings(sorted_token_pairs):
             dictionary_[previous_key] = [value]
         else:
             dictionary_[previous_key].append(value)
-    print(dictionary_)
 
     for key in dictionary_:
         value = dictionary_[key]
-        posting = list(sorted(set(value)))
-        dictionary_[key] = (len(posting), posting)
+        dictionary_[key] = (len(value), value)
 
     return dictionary_
 
