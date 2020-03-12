@@ -3,12 +3,13 @@
 from Directory_Listing import ListFiles
 from File_Reading import GetFileContents
 from Linguistic_Modules import LingStr
+from Postings_List_Merge import PostingListMerge
 import time
 from CONST import *
 import sys
 
 
-class TrieNode:
+class Dic_Tree:
     def __init__(self):
         self.nodes = dict()
         self.is_leaf = False
@@ -18,7 +19,7 @@ class TrieNode:
         curr = self
         for char in word:
             if char not in curr.nodes:
-                curr.nodes[char] = TrieNode()
+                curr.nodes[char] = Dic_Tree()
             curr = curr.nodes[char]
         curr.is_leaf = True
         curr.docId.append(docId)
@@ -41,7 +42,7 @@ if __name__ == "__main__":
 
     # Directory Listing
     all_files = ListFiles(rootDir)
-    dic_tree = TrieNode()
+    dic_tree = Dic_Tree()
 
     for file in all_files:
         # File Reading
@@ -60,10 +61,16 @@ if __name__ == "__main__":
         queries = [LingStr(item) for item in queries]
         try:
             if len(queries) < 2:
-                ff = dic_tree.search(queries[0])
-                print(ff)
+                file_list = dic_tree.search(queries[0])
+                print(file_list)
             else:
-                print()
+                file_lists = []
+                for q_item in queries:
+                    file_lists.append(dic_tree.search(q_item))
+                file_list_for_merge = []
+                for item in file_lists:
+                    file_list_for_merge.append((len(item),item))
+                print(PostingListMerge(file_list_for_merge))
         except BaseException:
             print([])
         q_time = (time.time() - q_start) * 1000
