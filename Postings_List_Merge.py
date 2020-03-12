@@ -11,12 +11,13 @@ from Linguistic_Modules import LingModule
 from Sorting_Tokens import SortTokens
 from Transformation_Postings import TransformationIntoPostings
 
-def postings_list_merge(postings_lists):   
-    # Intersect the postings lists in increasing order of length   
-    sorted_postings_lists = sorted(postings_lists, key=lambda l : l[0], reverse= True)
+
+def postings_list_merge(postings_lists):
+    # Intersect the postings lists in increasing order of length
+    sorted_postings_lists = sorted(postings_lists, key=lambda l: l[0], reverse=True)
     first_len, first_list = sorted_postings_lists.pop()
     merged_list = []
-    
+
     while sorted_postings_lists:
         second_len, second_list = sorted_postings_lists.pop()
 
@@ -43,12 +44,12 @@ if __name__ == "__main__":
     # Standalone Test
     token_list = []
     fileList = ListFiles(rootDir)
-    for i in range(5):
+    for i in range(2):
         tokenPair = GenerateTokens(GetFileContents(fileList[i]), fileList[i])
         modifed_tokenPair = LingModule(tokenPair)
-        token_list += modifed_tokenPair
-        
+        token_list = token_list + modifed_tokenPair
+
     sorted_list = SortTokens(token_list)
     transformed_postings = TransformationIntoPostings(sorted_list)
-    merged_list = postings_list_merge([transformed_postings['movement'], transformed_postings['need']])
+    merged_list = postings_list_merge([transformed_postings['zone'], transformed_postings['us']])
     print(merged_list)
