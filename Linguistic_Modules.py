@@ -5,9 +5,9 @@
 
 from nltk.stem.porter import PorterStemmer
 from nltk.stem.snowball import SnowballStemmer
-from Directory_Listing import listFiles
-from File_Reading import getFileContents
-from Tokenization import generateTokens
+from Directory_Listing import ListFiles
+from File_Reading import GetFileContents
+from Tokenization import GenerateTokens
 from CONST import *
 import re
 
@@ -15,13 +15,13 @@ portStemmer = PorterStemmer()
 snowStemmer = SnowballStemmer("english")
 
 
-def remove_punctuation_symbols(tokenPair):
+def RemovePuncSymls(tokenPair):
     """
         remove the !@#$%^&*()-_=+'`~ ":;|/.,?[]{}<> symbols
     """
     for item in tokenPair:
-        temp_item = str(item[0])
-        item[0] = temp_item.lower()
+        str_tmp = str(item[0])
+        item[0] = str_tmp.lower()
         item[0] = re.sub(r'[\^\[\]\-\\!@#$%&*()_=+`~":;|/.,?{}<>\']', '', item[0])
 
 
@@ -33,17 +33,31 @@ def SnowStem(tokenPair):
     return [(snowStemmer.stem(token), docID) for token, docID in tokenPair]
 
 
+def LingStr(token):
+    tmp = re.sub(r'[\^\[\]\-\\!@#$%&*()_=+`~":;|/.,?{}<>\']', '', str(token).lower())
+    tmp = portStemmer.stem(str(tmp))
+    tmp = snowStemmer.stem(str(tmp))
+    return tmp
+
+
+def LingModule(tokenPair):
+    return [(LingStr(token), docID) for token, docID in tokenPair]
+
+
 if __name__ == "__main__":
     # Standalone test
-    fileList = listFiles(rootDir)
-    fileContent = getFileContents(fileList[0])
-    tokenPair = generateTokens(fileContent, fileList[0])
+    fileList = ListFiles(rootDir)
+    fileContent = GetFileContents(fileList[0])
+    tokenPair = GenerateTokens(fileContent, fileList[0])
 
-    remove_punctuation_symbols(tokenPair)
-    print(tokenPair)
+  #  RemovePuncSymls(tokenPair)
+    #  print(tokenPair)
 
-    portStemTokenPair = PortStem(tokenPair)
-    print(portStemTokenPair)
+ ##   portStemTokenPair = PortStem(tokenPair)
+    # print(portStemTokenPair)
 
-    snowStemTokenPair = SnowStem(tokenPair)
-    print(snowStemTokenPair)
+ #   snowStemTokenPair = SnowStem(tokenPair)
+ #   print(snowStemTokenPair)
+
+    outputPair = LingModule(tokenPair)
+    print(outputPair)

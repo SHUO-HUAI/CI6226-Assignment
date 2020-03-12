@@ -3,11 +3,10 @@
 # Output: list of pairs < string (token) , string (document id) >
 
 from CONST import *
-import itertools
-from File_Reading import getFileContents
+from File_Reading import GetFileContents
 
 
-def generateTokens(contents, filePath):
+def GenerateTokens(contents, filePath):
     # tokens = re.sub(r"^\s+", "", contents).split()
 
     tokens = contents.split()
@@ -25,8 +24,8 @@ def generateTokens(contents, filePath):
 if __name__ == '__main__':
     # Standalone Test
     filePath = rootDir + "1.txt"
-    contents = getFileContents(filePath)
-    tokens = generateTokens(contents, filePath)
+    contents = GetFileContents(filePath)
+    tokens = GenerateTokens(contents, filePath)
     print(contents)
     print("tokens")
     print(tokens)

@@ -7,7 +7,7 @@ from os import listdir
 from os.path import isfile, join
 
 
-def listFiles(dir):
+def ListFiles(dir):
 	onlyfiles = [join(dir, f) for f in listdir(dir) if isfile(join(dir, f))]
 
 	return onlyfiles
@@ -15,5 +15,5 @@ def listFiles(dir):
 
 if __name__ == '__main__':
 	# Standalone Test
-	listedFiles = listFiles(rootDir)
+	listedFiles = ListFiles(rootDir)
 	print(listedFiles)

@@ -5,7 +5,7 @@
 from CONST import *
 
 
-def getFileContents(filePath):
+def GetFileContents(filePath):
 
 	f = open(filePath, encoding='utf-8')
 	lines = f.readlines()
@@ -17,5 +17,5 @@ def getFileContents(filePath):
 if __name__ == '__main__':
 	# Standalone Test
 	filePath = rootDir + '1.txt'
-	contents = getFileContents(filePath)
+	contents = GetFileContents(filePath)
 	print(contents)
