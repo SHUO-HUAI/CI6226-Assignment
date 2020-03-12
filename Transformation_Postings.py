@@ -43,4 +43,4 @@ if __name__ == "__main__":
     sorted_list = SortTokens(original_list)
     # print(sorted_list)
     transformed_postings = TransformationIntoPostings(sorted_list)
-    # print(transformed_postings)
+    print(transformed_postings)
