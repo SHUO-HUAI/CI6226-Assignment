@@ -12,7 +12,7 @@ from Sorting_Tokens import SortTokens
 from Transformation_Postings import TransformationIntoPostings
 
 
-def postings_list_merge(postings_lists):
+def PostingListMerge(postings_lists):
     # Intersect the postings lists in increasing order of length
 
     first_len, first_list = postings_lists.pop()
@@ -51,5 +51,5 @@ if __name__ == "__main__":
 
     sorted_list = SortTokens(token_list)
     transformed_postings = TransformationIntoPostings(sorted_list)
-    merged_list = postings_list_merge([transformed_postings['zone'], transformed_postings['us'], transformed_postings['tie'], transformed_postings['state']])
+    merged_list = PostingListMerge([transformed_postings['zone'], transformed_postings['us'], transformed_postings['tie'], transformed_postings['state']])
     print(merged_list)

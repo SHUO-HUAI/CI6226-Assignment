@@ -1,35 +1,35 @@
 # Test for all components 0-5
 
 from CONST import *
-from Directory_Listing import listFiles
-from File_Reading import getFileContents
-from Tokenization import generateTokens
-from Linguistic_Modules import PortStem, SnowStem
-from Sorting_Tokens import sortTokens
-from Transformation_Postings import transformation_into_postings
-from Postings_List_Merge import postings_list_merge
+from Directory_Listing import ListFiles
+from File_Reading import GetFileContents
+from Tokenization import GenerateTokens
+from Linguistic_Modules import LingModule
+from Sorting_Tokens import SortTokens
+from Transformation_Postings import TransformationIntoPostings
+from Postings_List_Merge import PostingListMerge
 
 # Directory Listing
-all_files = listFiles(rootDir)
+all_files = ListFiles(rootDir)
 all_token_pairs = []
 
 for file in all_files:
     # File Reading
-    file_text = getFileContents(file)
+    file_text = GetFileContents(file)
     # Tokenization
-    token_pairs = generateTokens(file_text, file)
+    token_pairs = GenerateTokens(file_text, file)
     # Linguistic Modules
-    modified_token_pairs = SnowStem(PortStem(token_pairs))
+    modified_token_pairs = LingModule(token_pairs)
     all_token_pairs += modified_token_pairs
 
 # Sorting the Tokens
-sorted_tokens = sortTokens(all_token_pairs)
-print(sorted_tokens)
+sorted_tokens = SortTokens(all_token_pairs)
+#print(sorted_tokens)
 
 # Transformation into Postings
-posting_list = transformation_into_postings(sorted_tokens)
+posting_list = TransformationIntoPostings(sorted_tokens)
 #print(posting_list)
 
 # Postings List Merge Component
-merged_positions = postings_list_merge([posting_list['mail'], posting_list['phone'], posting_list['clinton']])
+merged_positions = PostingListMerge([posting_list['mail'], posting_list['phone'], posting_list['clinton']])
 print(merged_positions)
