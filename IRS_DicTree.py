@@ -6,7 +6,6 @@ from Linguistic_Modules import LingStr
 from Postings_List_Merge import PostingListMerge
 import time
 from CONST import *
-import sys
 from bisect import insort
 
 
@@ -54,7 +53,6 @@ if __name__ == "__main__":
     del file_text
     time_index = (time.time() - start) * 1000
     print("Time for creating index:\t", time_index, "ms")
-    print("Memory for the index:\t", sys.getsizeof(dic_tree), "bytes")
 
     while True:
         query = input()

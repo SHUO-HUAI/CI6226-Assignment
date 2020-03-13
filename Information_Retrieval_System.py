@@ -42,7 +42,6 @@ if __name__ == "__main__":
 
     time_index = (time.time() - start)*1000
     print("Time for creating index:\t", time_index, "ms")
-    print("Memory for the index:\t", sys.getsizeof(posting_list), "bytes")
 
     while True:
         query = input()
