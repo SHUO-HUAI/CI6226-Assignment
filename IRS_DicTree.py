@@ -13,7 +13,7 @@ class Dic_Tree:
     def __init__(self):
         self.nodes = dict()
         self.is_leaf = False
-        self.docId = []
+        self.docIds = []
 
     def insert(self, word: str, docId: str):
         curr = self
@@ -22,7 +22,18 @@ class Dic_Tree:
                 curr.nodes[char] = Dic_Tree()
             curr = curr.nodes[char]
         curr.is_leaf = True
-        curr.docId.append(docId)
+        if docId not in curr.docIds:
+            length = len(curr.docIds)
+            if length == 0:
+                curr.docIds.append(docId)
+            else:
+                if docId > curr.docIds[length - 1]:
+                    curr.docIds.append(docId)
+                else:
+                    for i in range(length):
+                        if docId < curr.docIds[i]:
+                            curr.docIds.insert(i, docId)
+                            break
 
     def insert_many(self, words: [str], docId: str):
         for word in words:
@@ -34,7 +45,7 @@ class Dic_Tree:
             if char not in curr.nodes:
                 return []
             curr = curr.nodes[char]
-        return curr.docId
+        return curr.docIds
 
 
 if __name__ == "__main__":
@@ -66,14 +77,15 @@ if __name__ == "__main__":
                 file_list = dic_tree.search(queries[0])
                 print(file_list)
             else:
-                file_lists = []
-                for q_item in queries:
-                    file_lists.append(dic_tree.search(q_item))
                 file_list_for_merge = []
-                for item in file_lists:
-                    file_list_for_merge.append((len(item),item))
+                for q_item in queries:
+                    doc_list = dic_tree.search(q_item)
+
+                    file_list_for_merge.append((len(doc_list), doc_list))
+
                 print(PostingListMerge(file_list_for_merge))
         except BaseException:
+            print("error")
             print([])
         q_time = (time.time() - q_start) * 1000
         print("Time for this query:\t", q_time, "ms")
