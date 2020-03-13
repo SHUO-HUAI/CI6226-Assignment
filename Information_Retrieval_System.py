@@ -11,9 +11,16 @@ from Sorting_Tokens import SortTokens
 from Transformation_Postings import TransformationIntoPostings
 from Postings_List_Merge import PostingListMerge
 import time
-import sys
+import os
+from Get_Memory_Req import GetMemory
 
 if __name__ == "__main__":
+
+    pid = os.getpid()
+    pyname = os.path.basename(__file__)
+
+
+
 
     start = time.time()
 
@@ -37,11 +44,15 @@ if __name__ == "__main__":
     sorted_tokens = SortTokens(all_token_pairs)
     del all_token_pairs
     # Transformation into Postings
+    m_s = GetMemory(pid,pyname)
     posting_list = TransformationIntoPostings(sorted_tokens)
+    m_e = GetMemory(pid,pyname)
+    time_index = (time.time() - start)*1000
+
     del sorted_tokens
 
-    time_index = (time.time() - start)*1000
     print("Time for creating index:\t", time_index, "ms")
+    print("Memory for the index:\t", m_e - m_s, "KB")
 
     while True:
         query = input()
