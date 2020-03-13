@@ -7,7 +7,7 @@ from Postings_List_Merge import PostingListMerge
 import time
 from CONST import *
 import sys
-import bisect
+from bisect import insort
 
 
 class Dic_Tree:
@@ -22,7 +22,7 @@ class Dic_Tree:
                 curr.nodes[char] = Dic_Tree()
             curr = curr.nodes[char]
         if docId not in curr.docIds:
-            bisect.insort(curr.docIds,docId)
+            insort(curr.docIds,docId)
 
     def insert_many(self, words: [str], docId: str):
         for word in words:
