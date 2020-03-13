@@ -7,7 +7,7 @@ from Postings_List_Merge import PostingListMerge
 import time
 from CONST import *
 from bisect import insort
-from Get_Memory_Req import GetMemory
+#from Get_Memory_Req import GetMemory
 import os
 
 class Dic_Tree:
@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
     # Directory Listing
     all_files = ListFiles(rootDir)
-    m_s = GetMemory(pid,pyname)
+    #m_s = GetMemory(pid,pyname)
     dic_tree = Dic_Tree()
 
     for file in all_files:
@@ -58,11 +58,11 @@ if __name__ == "__main__":
     del tokens
     del file_text
 
-    m_e = GetMemory(pid,pyname)
+    #m_e = GetMemory(pid,pyname)
     time_index = (time.time() - start) * 1000
 
     print("Time for creating index:\t", time_index, "ms")
-    print("Memory for the index:\t", m_e - m_s, "KB")
+    #print("Memory for the index:\t", m_e - m_s, "KB")
     while True:
         query = input()
         q_start = time.time()
