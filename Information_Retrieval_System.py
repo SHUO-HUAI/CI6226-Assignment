@@ -54,7 +54,6 @@ if __name__ == "__main__":
                 length, fileList = posting_list[LingStr(query)]
                 print(fileList)
             else:
-                print([posting_list[item] for item in queries])
                 print(PostingListMerge([posting_list[item] for item in queries]))
         except BaseException:
             print([])
