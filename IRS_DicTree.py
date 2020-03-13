@@ -7,12 +7,12 @@ from Postings_List_Merge import PostingListMerge
 import time
 from CONST import *
 import sys
+import bisect
 
 
 class Dic_Tree:
     def __init__(self):
         self.nodes = dict()
-        self.is_leaf = False
         self.docIds = []
 
     def insert(self, word: str, docId: str):
@@ -21,19 +21,8 @@ class Dic_Tree:
             if char not in curr.nodes:
                 curr.nodes[char] = Dic_Tree()
             curr = curr.nodes[char]
-        curr.is_leaf = True
         if docId not in curr.docIds:
-            length = len(curr.docIds)
-            if length == 0:
-                curr.docIds.append(docId)
-            else:
-                if docId > curr.docIds[length - 1]:
-                    curr.docIds.append(docId)
-                else:
-                    for i in range(length):
-                        if docId < curr.docIds[i]:
-                            curr.docIds.insert(i, docId)
-                            break
+            bisect.insort(curr.docIds,docId)
 
     def insert_many(self, words: [str], docId: str):
         for word in words:
