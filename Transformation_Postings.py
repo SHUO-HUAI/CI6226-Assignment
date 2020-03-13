@@ -19,14 +19,15 @@ def TransformationIntoPostings(sorted_token_pairs):
 
     previous_key = ''
     for key, value in sorted_token_pairs:
+
         if previous_key != key:
             previous_key = key
             dictionary_[previous_key] = [value]
         else:
-            dictionary_[previous_key].append(value)
-
+            if value not in dictionary_[previous_key]:
+                dictionary_[previous_key].append(value)
     for key in dictionary_:
-        value = list(set(dictionary_[key]))
+        value = dictionary_[key]
         dictionary_[key] = (len(value), value)
 
     return dictionary_

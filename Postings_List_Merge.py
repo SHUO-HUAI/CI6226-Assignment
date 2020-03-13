@@ -14,7 +14,6 @@ from Transformation_Postings import TransformationIntoPostings
 
 def PostingListMerge(postings_lists):
     # Intersect the postings lists in increasing order of length
-
     first_len, first_list = postings_lists.pop()
     merged_list = []
 
@@ -36,20 +35,34 @@ def PostingListMerge(postings_lists):
                 p2 += 1
         first_list = merged_list
         first_len = length
+        merged_list = []
 
-    return list(set(merged_list))
+    return first_list
 
 
 if __name__ == "__main__":
     # Standalone Test
     token_list = []
     fileList = ListFiles(rootDir)
-    for i in range(2):
+    for i in range(5):
         tokenPair = GenerateTokens(GetFileContents(fileList[i]), fileList[i])
         modifed_tokenPair = LingModule(tokenPair)
         token_list = token_list + modifed_tokenPair
 
     sorted_list = SortTokens(token_list)
+
     transformed_postings = TransformationIntoPostings(sorted_list)
-    merged_list = PostingListMerge([transformed_postings['zone'], transformed_postings['us'], transformed_postings['tie'], transformed_postings['state']])
+    merged_list = PostingListMerge([transformed_postings['us'], transformed_postings['case']])
+
+    # a = [i for i in range(100)]
+    # b = [i * 2 for i in range(100)]
+    # c = [i * 3 for i in range(100)]
+    # d = [i * 5 for i in range(100)]
+    #
+    # a = (len(a), a)
+    # b = (len(b), b)
+    # c = (len(c), c)
+    # d = (len(d), d)
+    #
+    # merged_list = sorted(PostingListMerge([a, b, c, d]))
     print(merged_list)
